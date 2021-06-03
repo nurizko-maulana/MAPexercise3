@@ -13,5 +13,13 @@ import '../models/user.dart';
 
 class UserService {
   static Future<User> getUserByLoginAndPassword(
-      {String login, String password}) async {}
+      {String login, String password}) async {
+    final List json = await Rest.get('users?login=$login&&password=$password');
+    print(json);
+    if (json == null || json.length == 0) return null;
+    // print(json[0]);
+    final _user = User.fromJson(json[0]);
+    // print(_user);
+    return _user;
+  }
 }
