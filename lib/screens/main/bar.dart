@@ -4,15 +4,15 @@
 //   1. Build this screen with conditional UI technique (based on
 //      whether the user has logged in or not).
 //      This includes:
-//        a. The app bar shows 'unknown user' logo and the 'Login' button if
+//        [Done] a. The app bar shows 'unknown user' logo and the 'Login' button if
 //           the user has not logged in yet.
 //
-//        b. Otherwise (if the user has logged in), the app bar shows the user
+//        [DONE] b. Otherwise (if the user has logged in), the app bar shows the user
 //           photo and name, as well as the 'Logout' button.
 //
 //   2. Perform the following operations:
-//        a. Login  - This operation will navigate to the '/login' route.
-//        b. Logout - This will reset the 'user' state to 'null'.
+//        [DONE] a. Login  - This operation will navigate to the '/login' route.
+//        [DONE] b. Logout - This will reset the 'user' state to 'null'.
 //-----------------------------------------------------------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
