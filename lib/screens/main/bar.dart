@@ -42,11 +42,20 @@ class Bar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
-        IconButton(
-            icon: Icon(Icons.login),
-            onPressed: () async {
-              _state.user = await Navigator.pushNamed(context, '/login');
-            })
+        _state.user == null
+            ? IconButton(
+                icon: Icon(Icons.login),
+                onPressed: () async {
+                  _state.user = await Navigator.pushNamed(context, '/login');
+                })
+            : IconButton(
+                icon: Icon(
+                  Icons.logout,
+                  color: Colors.red,
+                ),
+                onPressed: () async {
+                  _state.user = null;
+                })
       ],
     );
   }
