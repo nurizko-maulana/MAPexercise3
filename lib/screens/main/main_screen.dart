@@ -5,9 +5,9 @@
 //   1. Declare all the states required for this screen. To be done in this file.
 //      You may also want to define getters and setters for the states.
 //      The states should include:
-//        a. the 'logged in user'
-//        b. the 'list of todos'
-//        c. a 'Future' data for the todo list
+//        [DONE]a. the 'logged in user'
+//        [DONE]b. the 'list of todos'
+//        [DONE]c. a 'Future' data for the todo list
 //
 //   2. Define several methods in the 'MainScreenState' class
 //      to synchronize changes on UI and data update on REST server:
@@ -30,7 +30,7 @@
 //           Otherwise, it shows the 'Plus' and 'Refresh' buttons
 //           This part is to be done here in this file.
 //
-//   3. Build the UI by composing from its components, i.e., Bar, Body and Float.
+//   [DONE]3. Build the UI by composing from its components, i.e., Bar, Body and Float.
 //      Besides, you will also need to pass the 'states' to the components.
 //-----------------------------------------------------------------------------------------------------------------------------
 
@@ -53,13 +53,34 @@ class MainScreen extends StatefulWidget {
 
 class MainScreenState extends State<MainScreen> {
   User _user;
+  List<Todo> _todos;
+  List<Todo> _futureTodos;
 
   get user => _user;
   set user(value) {
     setState(() {
       _user = value;
+      if (user != null) loadUserTodos();
+      print('todo object $todos');
     });
   }
+
+  get todos => _todos;
+  set todos(value) {
+    setState(() {
+      _todos = value;
+    });
+  }
+
+  get futureTodos => _futureTodos;
+  set futureTodos(value) {
+    setState(() {
+      _futureTodos = value;
+    });
+  }
+
+  void loadUserTodos() async =>
+      todos = await TodoService.getTodoListByUser(user.id);
 
   void addTodo(Todo todo) async {}
   void updateTodo({int index, Todo todo}) async {}
@@ -72,8 +93,8 @@ class MainScreenState extends State<MainScreen> {
       child: SafeArea(
         child: Scaffold(
           appBar: Bar(state: this),
-          body: Body(),
-          floatingActionButton: Float(),
+          body: Body(state: this),
+          floatingActionButton: Float(state: this),
         ),
       ),
     );
