@@ -54,28 +54,30 @@ class MainScreen extends StatefulWidget {
 class MainScreenState extends State<MainScreen> {
   User _user;
   List<Todo> _todos;
-  Future<List<Todo>> _futureTodos;
+  // Future<List<Todo>> _futureTodos;
 
   get user => _user;
   set user(value) {
-    _user = value;
-    loadUserTodos();
+    setState(() {
+      _user = value;
+      loadUserTodos();
+    });
   }
 
   get todos => _todos;
   set todos(value) {
     _todos = value;
-    // setState(() {});
-  }
-
-  get futureTodos => _futureTodos;
-  set futureTodos(value) {
-    _futureTodos = value;
     setState(() {});
   }
 
-  void loadUserTodos() {
-    if (user != null) futureTodos = TodoService.getTodoListByUser(user.id);
+  // get futureTodos => _futureTodos;
+  // set futureTodos(value) {
+  //   _futureTodos = value;
+  //   setState(() {});
+  // }
+
+  void loadUserTodos() async {
+    if (user != null) todos = await TodoService.getTodoListByUser(user.id);
   }
 
   void addTodo(Todo todo) async {}

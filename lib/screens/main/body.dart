@@ -23,19 +23,6 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Todo>>(
-        future: _state.futureTodos,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            _state.todos = _state.futureTodos;
-            print('todo object ${_state.todos}');
-          } else
-            return Center(child: CircularProgressIndicator());
-          return _buildListView();
-        });
-  }
-
-  ListView _buildListView() {
     return ListView.separated(
       itemCount: _state.todos != null ? _state.todos.length : 0,
       separatorBuilder: (context, index) => Divider(
