@@ -52,6 +52,15 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
+  User _user;
+
+  get user => _user;
+  set user(value) {
+    setState(() {
+      _user = value;
+    });
+  }
+
   void addTodo(Todo todo) async {}
   void updateTodo({int index, Todo todo}) async {}
   void removeTodo(int index) async {}
@@ -62,7 +71,7 @@ class MainScreenState extends State<MainScreen> {
       onWillPop: () => Future.value(false),
       child: SafeArea(
         child: Scaffold(
-          appBar: Bar(),
+          appBar: Bar(state: this),
           body: Body(),
           floatingActionButton: Float(),
         ),

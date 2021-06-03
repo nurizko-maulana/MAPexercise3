@@ -11,10 +11,10 @@ import 'screens/main/main_screen.dart';
 
 Route<dynamic> createRoute(settings) {
   switch (settings.name) {
+    case '/':
     case '/main':
       return MainScreen.route();
 
-    case '/':
     case '/login':
       return LoginScreen.route();
 

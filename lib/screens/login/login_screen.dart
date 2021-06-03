@@ -29,7 +29,7 @@ class LoginScreenState extends State<LoginScreen> {
   String _username;
   String _password;
   bool _showPassword = false;
-  bool _showErrorMesage = false;
+  bool _showErrorMessage = false;
 
   get username => _username;
   set username(value) => _username = value;
@@ -44,10 +44,10 @@ class LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  get showErrorMesage => _showErrorMesage;
-  set showErrorMesage(value) {
+  get showErrorMessage => _showErrorMessage;
+  set showErrorMessage(value) {
     setState(() {
-      _showErrorMesage = value;
+      _showErrorMessage = value;
     });
   }
 
