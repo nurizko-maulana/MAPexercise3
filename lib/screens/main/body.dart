@@ -23,15 +23,31 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<List<Todo>>(
+        future: _state.futureTodos,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            _state.todos = _state.futureTodos;
+            print('todo object ${_state.todos}');
+          } else
+            return Center(child: CircularProgressIndicator());
+          return _buildListView();
+        });
+  }
+
+  ListView _buildListView() {
     return ListView.separated(
-      itemCount: 5,
+      itemCount: _state.todos != null ? _state.todos.length : 0,
       separatorBuilder: (context, index) => Divider(
         color: Colors.blueGrey,
       ),
       itemBuilder: (context, index) => ListTile(
-        title: Text('Todo title',
-            style: TextStyle(decoration: TextDecoration.lineThrough)),
-        subtitle: Text('Todo description'),
+        title: Text(_state.todos[index].title,
+            style: TextStyle(
+                decoration: _state.todos[index].done == null
+                    ? TextDecoration.lineThrough
+                    : TextDecoration.none)),
+        subtitle: Text(_state.todos[index].description),
         onTap: () {},
         onLongPress: () {},
       ),

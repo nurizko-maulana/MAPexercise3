@@ -1,6 +1,6 @@
 // TODO Complete the service class, UserService
 //-----------------------------------------------------------------------------------------------------------------------------
-//? Things to do:
+//[DONE] Things to do:
 //   Define the following method to handle REST call about the User data
 //    to the REST service.
 //       a. getUserByLoginAndPassword: to get a user data, given his/her login and password.

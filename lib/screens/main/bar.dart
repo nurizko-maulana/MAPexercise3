@@ -55,6 +55,7 @@ class Bar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 onPressed: () async {
                   _state.user = null;
+                  _state.todos = null;
                 })
       ],
     );

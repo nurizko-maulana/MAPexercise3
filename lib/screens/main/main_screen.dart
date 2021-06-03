@@ -54,33 +54,29 @@ class MainScreen extends StatefulWidget {
 class MainScreenState extends State<MainScreen> {
   User _user;
   List<Todo> _todos;
-  List<Todo> _futureTodos;
+  Future<List<Todo>> _futureTodos;
 
   get user => _user;
   set user(value) {
-    setState(() {
-      _user = value;
-      if (user != null) loadUserTodos();
-      print('todo object $todos');
-    });
+    _user = value;
+    loadUserTodos();
   }
 
   get todos => _todos;
   set todos(value) {
-    setState(() {
-      _todos = value;
-    });
+    _todos = value;
+    // setState(() {});
   }
 
   get futureTodos => _futureTodos;
   set futureTodos(value) {
-    setState(() {
-      _futureTodos = value;
-    });
+    _futureTodos = value;
+    setState(() {});
   }
 
-  void loadUserTodos() async =>
-      todos = await TodoService.getTodoListByUser(user.id);
+  void loadUserTodos() {
+    if (user != null) futureTodos = TodoService.getTodoListByUser(user.id);
+  }
 
   void addTodo(Todo todo) async {}
   void updateTodo({int index, Todo todo}) async {}
@@ -93,7 +89,7 @@ class MainScreenState extends State<MainScreen> {
       child: SafeArea(
         child: Scaffold(
           appBar: Bar(state: this),
-          body: Body(state: this),
+          body: user != null ? Body(state: this) : null,
           floatingActionButton: Float(state: this),
         ),
       ),

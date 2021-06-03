@@ -39,7 +39,8 @@ class Body extends StatelessWidget {
             icon: Icons.people,
             onChanged: (value) {
               _state.username = value;
-              _state.showErrorMessage = false;
+              if (_state.showErrorMessage == true)
+                _state.showErrorMessage = false;
             }),
         _buildTextField(
             hint: 'Password',
@@ -53,7 +54,8 @@ class Body extends StatelessWidget {
                 }),
             onChanged: (value) {
               _state.password = value;
-              _state.showErrorMessage = false;
+              if (_state.showErrorMessage == true)
+                _state.showErrorMessage = false;
             }),
         if (_state.showErrorMessage)
           Text(
