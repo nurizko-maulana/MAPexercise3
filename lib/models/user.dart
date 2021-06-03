@@ -2,8 +2,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------
 //? Things to do:
 // Define the following methods:
-//   a. the 'fromJson' constructor
-//   b. the 'toJson' method
+//   [DONE]a. the 'fromJson' constructor
+//   [DONE]b. the 'toJson' method
 //-----------------------------------------------------------------------------------------------------------------------------
 
 class User {
@@ -47,4 +47,21 @@ class User {
             photoUrl: from.photoUrl,
             login: from.login,
             password: from.password);
+
+  User.fromJson(Map<String, dynamic> json)
+      : this(
+          id: json['id'] ?? 0,
+          name: json['name'] ?? '',
+          photoUrl: json['photoUrl'] ?? '',
+          login: json['login'] ?? '',
+          password: json['password'] ?? '',
+        );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'photoUrl': photoUrl,
+        'login': login,
+        'password': password,
+      };
 }
