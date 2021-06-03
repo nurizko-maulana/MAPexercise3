@@ -3,14 +3,14 @@
 //? Things to do:
 //   1. Build this screen with conditional UI technique.
 //      This includes:
-//        a. Show or hide the entered password (by tapping on the 'eye' icon)
+//        [DONE] a. Show or hide the entered password (by tapping on the 'eye' icon)
 //        b. Show the error message if the user entered wrong username
 //           or password.
 //
-//   2. Update the states and reflect the changes on the UI:
-//        a. when the user types in the 'Username'.
-//        b. when the user types in the 'Password'.
-//        c. when the user taps on the 'eye' icon (to show/hide the password).
+//   [DONE] 2. Update the states and reflect the changes on the UI:
+//        [DONE] a. when the user types in the 'Username'.
+//        [DONE] b. when the user types in the 'Password'.
+//        [DONE] c. when the user taps on the 'eye' icon (to show/hide the password).
 //
 //   3. Perform the following operations:
 //        a. Proceed to Login - i.e. when the 'Log in' button is tapped on.
@@ -35,13 +35,20 @@ class Body extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildTextField(
-            hint: 'Username', icon: Icons.people, onChanged: (value) => () {}),
+            hint: 'Username',
+            icon: Icons.people,
+            onChanged: (value) => _state.username),
         _buildTextField(
             hint: 'Password',
-            isObsecure: true,
+            isObsecure: !_state.showPassword,
             icon: Icons.lock,
-            button: IconButton(icon: Icon(Icons.visibility), onPressed: () {}),
-            onChanged: (value) => () {}),
+            button: IconButton(
+                icon: Icon(Icons.visibility),
+                onPressed: () {
+                  print(_state.showPassword);
+                  _state.showPassword = !_state.showPassword;
+                }),
+            onChanged: (value) => _state.password = value),
         Text(
           'Invalid username or password!',
           style: TextStyle(color: Colors.red, fontSize: 20.0),
