@@ -1,7 +1,7 @@
 // TODO Complete the file login_screen.dart
 //-----------------------------------------------------------------------------------------------------------------------------
 //? Things to do:
-//   1. Declare all the states required for this screen. This part should be done in this file.
+//   [DONE]1. Declare all the states required for this screen. This part should be done in this file.
 //      You may also want to define getters and setters for the states.
 //      The states should include:
 //        a. username
@@ -9,7 +9,7 @@
 //        b. show or hide the password
 //        c. show or hide the error message 'invalid username or password'
 //
-//   2. Build the UI by composing from its components, i.e., Body.
+//   [DONE]2. Build the UI by composing from its components, i.e., Body.
 //      Besides, you will also need to pass the 'states' to the component.
 //-----------------------------------------------------------------------------------------------------------------------------
 
@@ -26,13 +26,38 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
+  String _username;
+  String _password;
+  bool _showPassword;
+  bool _showErrorMesage;
+
+  get username => _username;
+  set username(value) => _username = value;
+
+  get password => _password;
+  set password(value) => _password = value;
+
+  get showPassword => _showPassword;
+  set showPassword(value) {
+    setState(() {
+      _showPassword = value;
+    });
+  }
+
+  get showErrorMesage => _showErrorMesage;
+  set showErrorMesage(value) {
+    setState(() {
+      _showErrorMesage = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: SafeArea(
         child: Scaffold(
-          body: Body(),
+          body: Body(state: this),
         ),
       ),
     );

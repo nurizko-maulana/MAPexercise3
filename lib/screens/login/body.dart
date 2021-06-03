@@ -38,7 +38,7 @@ class Body extends StatelessWidget {
             hint: 'Username', icon: Icons.people, onChanged: (value) => () {}),
         _buildTextField(
             hint: 'Password',
-            isObsecure: false,
+            isObsecure: true,
             icon: Icons.lock,
             button: IconButton(icon: Icon(Icons.visibility), onPressed: () {}),
             onChanged: (value) => () {}),

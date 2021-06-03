@@ -20,7 +20,7 @@ void main() => runApp(
         title: 'MAP Exercise 3',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.green),
-        initialRoute: '/login',
+        initialRoute: '/',
         onGenerateRoute: createRoute,
       ),
     );
