@@ -17,9 +17,7 @@ class UserService {
     final List json = await Rest.get('users?login=$login&&password=$password');
     print(json);
     if (json == null || json.length == 0) return null;
-    // print(json[0]);
     final _user = User.fromJson(json[0]);
-    // print(_user);
     return _user;
   }
 }

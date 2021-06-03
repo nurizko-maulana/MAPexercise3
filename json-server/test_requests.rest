@@ -9,7 +9,7 @@ GET {{baseUrl}}/users?login=alex&password=123
 
 ### Request 2 : Get the list of todos for a given user
 ### Purpose   : To render the main screen
-GET {{baseUrl}}/todos?user=2
+GET {{baseUrl}}/todos?user=1
 
 ### Request 3 : Create a new todo for a given user
 POST {{baseUrl}}/todos
