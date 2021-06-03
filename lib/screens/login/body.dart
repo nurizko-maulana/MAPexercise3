@@ -4,7 +4,7 @@
 //   1. Build this screen with conditional UI technique.
 //      This includes:
 //        [DONE] a. Show or hide the entered password (by tapping on the 'eye' icon)
-//        b. Show the error message if the user entered wrong username
+//        [DONE] b. Show the error message if the user entered wrong username
 //           or password.
 //
 //   [DONE] 2. Update the states and reflect the changes on the UI:
@@ -49,10 +49,11 @@ class Body extends StatelessWidget {
                   _state.showPassword = !_state.showPassword;
                 }),
             onChanged: (value) => _state.password = value),
-        Text(
-          'Invalid username or password!',
-          style: TextStyle(color: Colors.red, fontSize: 20.0),
-        ),
+        if (_state.showErrorMesage)
+          Text(
+            'Invalid username or password!',
+            style: TextStyle(color: Colors.red, fontSize: 20.0),
+          ),
         SizedBox(height: 10.0),
         _buildButtons(context)
       ],
@@ -78,7 +79,10 @@ class Body extends StatelessWidget {
       children: [
         ElevatedButton(
           child: Text('Log in'),
-          onPressed: () {},
+          onPressed: () {
+            final User _user = await UserService.getUserByLoginAndPassword(
+                login: _state.usernmae, password: _state.password);
+          },
         ),
         SizedBox(width: 10.0),
         ElevatedButton(

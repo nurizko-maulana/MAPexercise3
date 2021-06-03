@@ -29,7 +29,7 @@ class LoginScreenState extends State<LoginScreen> {
   String _username;
   String _password;
   bool _showPassword = false;
-  bool _showErrorMesage;
+  bool _showErrorMesage = false;
 
   get username => _username;
   set username(value) => _username = value;
