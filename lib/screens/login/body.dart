@@ -13,8 +13,8 @@
 //        [DONE] c. when the user taps on the 'eye' icon (to show/hide the password).
 //
 //   3. Perform the following operations:
-//        a. Proceed to Login - i.e. when the 'Log in' button is tapped on.
-//        b. Cancel the login - i.e. when the 'Cancel' button is tapped on.
+//        [DONE] a. Proceed to Login - i.e. when the 'Log in' button is tapped on.
+//        [DONE] b. Cancel the login - i.e. when the 'Cancel' button is tapped on.
 //-----------------------------------------------------------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
@@ -37,7 +37,10 @@ class Body extends StatelessWidget {
         _buildTextField(
             hint: 'Username',
             icon: Icons.people,
-            onChanged: (value) => _state.username),
+            onChanged: (value) {
+              _state.username = value;
+              _state.showErrorMessage = false;
+            }),
         _buildTextField(
             hint: 'Password',
             isObsecure: !_state.showPassword,
@@ -48,8 +51,11 @@ class Body extends StatelessWidget {
                   print(_state.showPassword);
                   _state.showPassword = !_state.showPassword;
                 }),
-            onChanged: (value) => _state.password = value),
-        if (_state.showErrorMesage)
+            onChanged: (value) {
+              _state.password = value;
+              _state.showErrorMessage = false;
+            }),
+        if (_state.showErrorMessage)
           Text(
             'Invalid username or password!',
             style: TextStyle(color: Colors.red, fontSize: 20.0),
@@ -79,15 +85,21 @@ class Body extends StatelessWidget {
       children: [
         ElevatedButton(
           child: Text('Log in'),
-          onPressed: () {
+          onPressed: () async {
             final User _user = await UserService.getUserByLoginAndPassword(
-                login: _state.usernmae, password: _state.password);
+                login: _state.username, password: _state.password);
+            // print(_user);
+            if (_user == null) _state.showErrorMessage = true;
+            if (_user != null) Navigator.pop(context, _user);
           },
         ),
         SizedBox(width: 10.0),
         ElevatedButton(
           child: Text('Cancel'),
-          onPressed: () {},
+          onPressed: () {
+            _state.showErrorMessage = false;
+            Navigator.pop(context, null);
+          },
         ),
       ],
     );
