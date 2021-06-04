@@ -16,6 +16,13 @@ class Float extends StatelessWidget {
 
   final MainScreenState _state;
 
+  _onClickPlusButton(BuildContext context) async {
+    final _todo = await Navigator.pushNamed(context, '/new');
+    if (_todo != null) {
+      _state.addTodo(_todo);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -25,7 +32,9 @@ class Float extends StatelessWidget {
           tooltip: 'Add a new todo',
           child: Icon(Icons.add),
           heroTag: null,
-          onPressed: () {},
+          onPressed: () {
+            _onClickPlusButton(context);
+          },
         ),
         FloatingActionButton(
             tooltip: 'Refresh',

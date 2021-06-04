@@ -23,7 +23,11 @@ class TodoService {
     return todos;
   }
 
-  static Future<Todo> addTodo(Todo todo) async {}
+  static Future<Todo> addTodo(Todo todo) async {
+    final List json = await Rest.post('todos?user');
+    if (json == null || json.length == 0) return null;
+    return Todo.fromJson(json[0]);
+  }
 
   static Future<Todo> updateTodo(Todo todo) async {}
 

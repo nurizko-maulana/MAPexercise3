@@ -37,8 +37,8 @@ class EditScreenState extends State<EditScreen> {
       onWillPop: () => Future.value(false),
       child: SafeArea(
         child: Scaffold(
-          appBar: Bar(),
-          body: Body(),
+          appBar: Bar(state: this),
+          body: Body(state: this),
         ),
       ),
     );

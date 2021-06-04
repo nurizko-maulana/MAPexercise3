@@ -80,7 +80,16 @@ class MainScreenState extends State<MainScreen> {
     if (user != null) todos = await TodoService.getTodoListByUser(user.id);
   }
 
-  void addTodo(Todo todo) async {}
+  void addTodo(Todo todo) async {
+    if (user != null) {
+      todo.user = user.id;
+      final Todo _todo = await TodoService.addTodo(todo);
+      setState(() {
+        _todos.add(_todo);
+      });
+    }
+  }
+
   void updateTodo({int index, Todo todo}) async {}
   void removeTodo(int index) async {}
 
@@ -92,7 +101,7 @@ class MainScreenState extends State<MainScreen> {
         child: Scaffold(
           appBar: Bar(state: this),
           body: user != null ? Body(state: this) : null,
-          floatingActionButton: Float(state: this),
+          floatingActionButton: user != null ? Float(state: this) : null,
         ),
       ),
     );
