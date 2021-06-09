@@ -23,13 +23,16 @@ class TodoService {
     return todos;
   }
 
-  static Future<Todo> addTodo(Todo todo) async {
-    final List json = await Rest.post('todos?user');
+  static Future addTodo(Todo todo) async {
+    final json = await Rest.post('todos', data: todo);
     if (json == null || json.length == 0) return null;
-    return Todo.fromJson(json[0]);
   }
 
-  static Future<Todo> updateTodo(Todo todo) async {}
+  static Future updateTodo(Todo todo) async {
+    await Rest.put('todos/${todo.id}', data: todo);
+  }
 
-  static Future<void> removeTodo(Todo todo) async {}
+  static Future removeTodo(int todoId) async {
+    await Rest.delete('todos/$todoId');
+  }
 }

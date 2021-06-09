@@ -11,7 +11,7 @@
 //
 //   2. Define several methods in the 'MainScreenState' class
 //      to synchronize changes on UI and data update on REST server:
-//        a. to get all the list of todos for the current user
+//        [DONE]a. to get all the list of todos for the current user
 //        b. addTodo(): to add a new todo
 //        c. updateTodo(): to edit a todo
 //        d. deleteTodo(): to delete a todo
@@ -83,15 +83,35 @@ class MainScreenState extends State<MainScreen> {
   void addTodo(Todo todo) async {
     if (user != null) {
       todo.user = user.id;
-      final Todo _todo = await TodoService.addTodo(todo);
+      await TodoService.addTodo(todo);
       setState(() {
-        _todos.add(_todo);
+        _todos.add(todo);
       });
     }
   }
 
-  void updateTodo({int index, Todo todo}) async {}
-  void removeTodo(int index) async {}
+  void updateTodo({int index, Todo todo}) async {
+    if (user != null) {
+      Todo _todo =
+          await Navigator.pushNamed(context, '/edit', arguments: todo) as Todo;
+
+      if (_todo != null) {
+        await TodoService.updateTodo(_todo);
+      }
+      setState(() {
+        loadUserTodos();
+      });
+    }
+  }
+
+  void removeTodo(int index) async {
+    if (user != null) {
+      await TodoService.removeTodo(_todos[index].id);
+      setState(() {
+        loadUserTodos();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

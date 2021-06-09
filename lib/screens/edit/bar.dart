@@ -19,8 +19,9 @@ class Bar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('Edit a Todo'),
-      // : Text('Add a new todo'),
+      title: _state.isEditing == true
+          ? Text('Edit a Todo')
+          : Text('Add a new todo'),
       leading: Container(),
       centerTitle: true,
     );

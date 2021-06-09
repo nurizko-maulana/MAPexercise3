@@ -31,13 +31,21 @@ class Body extends StatelessWidget {
       itemBuilder: (context, index) => ListTile(
         title: Text(_state.todos[index].title,
             style: TextStyle(
-                decoration: _state.todos[index].done == null
+                decoration: _state.todos[index].done == true
                     ? TextDecoration.lineThrough
                     : TextDecoration.none)),
         subtitle: Text(_state.todos[index].description),
-        onTap: () {},
-        onLongPress: () {},
+        onTap: () {
+          _state.updateTodo(index: index, todo: _state.todos[index]);
+        },
+        onLongPress: () {
+          removeList(index);
+        },
       ),
     );
+  }
+
+  void removeList(int index) {
+    _state.removeTodo(index);
   }
 }

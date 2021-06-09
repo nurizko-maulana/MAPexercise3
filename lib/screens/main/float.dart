@@ -8,7 +8,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------
 
 import 'package:flutter/material.dart';
-
+import '../../models/todo.dart';
 import 'main_screen.dart';
 
 class Float extends StatelessWidget {
@@ -16,11 +16,13 @@ class Float extends StatelessWidget {
 
   final MainScreenState _state;
 
-  _onClickPlusButton(BuildContext context) async {
-    final _todo = await Navigator.pushNamed(context, '/new');
+  void _onClickPlusButton(BuildContext context) async {
+    Todo _todo = await Navigator.pushNamed(context, '/new') as Todo;
     if (_todo != null) {
+      print(_todo);
       _state.addTodo(_todo);
-    }
+    } else
+      print("todo data return null");
   }
 
   @override
@@ -40,7 +42,9 @@ class Float extends StatelessWidget {
             tooltip: 'Refresh',
             child: Icon(Icons.refresh),
             heroTag: null,
-            onPressed: () {})
+            onPressed: () {
+              _state.loadUserTodos();
+            })
       ],
     );
   }

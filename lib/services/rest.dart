@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 
 class Rest {
   //? Change the baseUrl according to your PC's IP address. Remain the port as 3000
-  static const String _baseUrl = 'http://192.168.0.104:3000';
+  static const String _baseUrl = 'http://192.168.0.102:3000';
 
   // Send a GET request to retrieve data from a REST server
   static Future get(String endpoint) async {
@@ -55,11 +55,11 @@ class Rest {
   }
 
   // Send a DELETE request to remove an existing data from the REST server.
-  static Future delete(String endpoint) async {
+  static Future<bool> delete(String endpoint) async {
     final response = await http.delete(Uri.parse('$_baseUrl/$endpoint'));
-
+    print(response.statusCode);
     if (response.statusCode == 200) {
-      return;
+      return true;
     }
     throw response;
   }

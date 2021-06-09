@@ -29,19 +29,41 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        _buildTextLisTile(
-            label: 'Title',
-            value: 'Todo title goes here',
-            onChanged: (value) {}),
-        _buildTextLisTile(
-            label: 'Description',
-            value: 'Todo description goes here',
-            onChanged: (value) {}),
-        CheckboxListTile(
-          value: false,
-          onChanged: (value) {},
-          title: Text('Done'),
-        ),
+        _state.isEditing == true
+            ? _buildTextLisTile(
+                label: 'Title',
+                value: _state.data.title,
+                onChanged: (value) {
+                  _state.newTodo.title = value;
+                })
+            : _buildTextLisTile(
+                label: 'Title',
+                value: '',
+                onChanged: (value) {
+                  _state.setTitle = value;
+                }),
+        _state.isEditing == true
+            ? _buildTextLisTile(
+                label: 'Description',
+                value: _state.data.description,
+                onChanged: (value) {
+                  _state.newTodo.description = value;
+                })
+            : _buildTextLisTile(
+                label: 'Description',
+                value: '',
+                onChanged: (value) {
+                  _state.setDescription = value;
+                }),
+        _state.isEditing == true
+            ? CheckboxListTile(
+                value: _state.done,
+                onChanged: (value) {
+                  _state.setDone = value;
+                },
+                title: Text('Done'),
+              )
+            : Container(),
         _buildButtons(context)
       ],
     );
@@ -65,12 +87,16 @@ class Body extends StatelessWidget {
       children: [
         ElevatedButton(
           child: Text('Ok'),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context, _state.newTodo);
+          },
         ),
         SizedBox(width: 10.0),
         ElevatedButton(
           child: Text('Cancel'),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context, null);
+          },
         ),
       ],
     );

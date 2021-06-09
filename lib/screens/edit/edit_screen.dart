@@ -13,7 +13,7 @@ import '../../models/todo.dart';
 import 'body.dart';
 
 class EditScreen extends StatefulWidget {
-  static Route route({isEditing = true, data}) => MaterialPageRoute(
+  static Route route({isEditing = true, Todo data}) => MaterialPageRoute(
       builder: (context) => EditScreen(isEditing: isEditing, data: data));
 
   final bool _isEditing;
@@ -31,6 +31,28 @@ class EditScreen extends StatefulWidget {
 }
 
 class EditScreenState extends State<EditScreen> {
+  Todo _newTodo = Todo();
+
+  get isEditing => widget._isEditing;
+  get data => widget._data;
+  get newTodo => _newTodo;
+  set newTodo(value) => _newTodo = value;
+
+  set setTitle(value) => _newTodo.title = value;
+  set setDescription(value) => _newTodo.description = value;
+  get done => _newTodo.done;
+  set setDone(value) {
+    setState(() {
+      _newTodo.done = value;
+      print("done tapped");
+    });
+  }
+
+  @override
+  void initState() {
+    _newTodo = data;
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
